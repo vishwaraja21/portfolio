@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useOSStore } from '../store/useOSStore'
 
 export const TerminalWindow = () => {
-  const { terminalHistory, executeCommand } = useOSStore()
+  const { terminalHistory, executeCommand, isMobile } = useOSStore()
   const [inputVal, setInputVal] = useState('')
   const terminalEndRef = useRef(null)
   const inputRef = useRef(null)
@@ -65,7 +65,7 @@ export const TerminalWindow = () => {
       </div>
 
       <form onSubmit={handleSubmit} className="flex items-center gap-1.5 mt-2 select-none">
-        <span className="text-neon-purple font-bold">vishwaraja@devos:~$</span>
+        <span className="text-neon-purple font-bold">{isMobile ? 'devos:~$' : 'vishwaraja@devos:~$'}</span>
         <div className="flex-1 flex items-center relative">
           <input
             ref={inputRef}

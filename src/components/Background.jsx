@@ -183,7 +183,7 @@ export const Background = () => {
         className="absolute inset-0 w-full h-full block"
       />
       {/* Holographic Subtle Watermark Name projection */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center opacity-[0.15] select-none pointer-events-none z-0">
+      <div className="absolute inset-0 flex flex-col items-center justify-center opacity-[0.06] select-none pointer-events-none z-0">
         <h1 className="font-display font-extrabold text-[7vw] tracking-[0.2em] uppercase text-white/90 leading-none text-center select-none">
           VISHWARAJA R
         </h1>

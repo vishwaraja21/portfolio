@@ -6,9 +6,8 @@ import { Desktop } from './components/Desktop'
 import { useOSStore } from './store/useOSStore'
 
 function App() {
-  const { isBooted } = useOSStore()
+  const { isBooted, isMobile, setIsMobile } = useOSStore()
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
-  const [isMobile, setIsMobile] = useState(true)
 
   // Detect mobile & track mouse position for follower cursor
   useEffect(() => {
@@ -30,7 +29,7 @@ function App() {
       window.removeEventListener('resize', checkMobile)
       window.removeEventListener('mousemove', handleMouseMove)
     }
-  }, [isMobile])
+  }, [isMobile, setIsMobile])
 
   return (
     <div className="relative min-h-screen text-[#e2e8f0] font-sans antialiased overflow-hidden select-none">

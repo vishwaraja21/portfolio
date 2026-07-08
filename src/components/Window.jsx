@@ -4,7 +4,7 @@ import { useOSStore } from '../store/useOSStore'
 import { VscChromeClose, VscChromeMinimize, VscChromeMaximize, VscChromeRestore } from 'react-icons/vsc'
 
 export const Window = ({ id, title, children, x, y, width, height, zIndex, isMaximized, isMinimized, isOpen }) => {
-  const { closeWindow, minimizeWindow, toggleMaximizeWindow, focusWindow, activeWindowId } = useOSStore()
+  const { closeWindow, minimizeWindow, toggleMaximizeWindow, focusWindow, activeWindowId, isMobile } = useOSStore()
   const windowRef = useRef(null)
 
   if (!isOpen || isMinimized) return null
@@ -52,29 +52,32 @@ export const Window = ({ id, title, children, x, y, width, height, zIndex, isMax
     }
   }
 
+  const screenW = typeof window !== 'undefined' ? window.innerWidth : 1024
+  const screenH = typeof window !== 'undefined' ? window.innerHeight : 768
+
   return (
     <motion.div
       ref={windowRef}
-      initial={isMaximized ? { scale: 1, opacity: 1 } : { scale: 0.95, opacity: 0, x, y }}
+      initial={(isMaximized || isMobile) ? { scale: 0.95, opacity: 0, x: 0, y: 0 } : { scale: 0.95, opacity: 0, x, y }}
       animate={
-        isMaximized
+        (isMaximized || isMobile)
           ? { x: 0, y: 0, width: '100%', height: 'calc(100% - 48px)', scale: 1, opacity: 1 }
           : { x, y, width, height, scale: 1, opacity: 1 }
       }
       exit={{ scale: 0.95, opacity: 0 }}
       transition={{ type: 'spring', stiffness: 300, damping: 26 }}
       style={{ zIndex }}
-      drag={!isMaximized}
+      drag={!isMaximized && !isMobile}
       dragHandleClassName="window-titlebar"
       dragMomentum={false}
       dragElastic={0.05}
-      dragConstraints={{ left: 0, top: 0, right: window.innerWidth - 150, bottom: window.innerHeight - 150 }}
+      dragConstraints={{ left: 0, top: 0, right: screenW - 150, bottom: screenH - 150 }}
       onPointerDown={() => focusWindow(id)}
       className={`fixed flex flex-col rounded-lg overflow-hidden glass-panel border backdrop-blur-xl ${getGlowClass()} transition-shadow duration-300`}
     >
       {/* Titlebar */}
       <div
-        onDoubleClick={() => toggleMaximizeWindow(id)}
+        onDoubleClick={() => !isMobile && toggleMaximizeWindow(id)}
         className="window-titlebar flex items-center justify-between px-4 py-2.5 bg-black/40 border-b border-white/5 cursor-move select-none"
       >
         <div className="flex items-center gap-2">
@@ -98,15 +101,17 @@ export const Window = ({ id, title, children, x, y, width, height, zIndex, isMax
             >
               <span className="text-[6px] text-yellow-950 font-bold opacity-0 group-hover:opacity-100 transition-opacity">─</span>
             </button>
-            <button
-              onClick={(e) => {
-                e.stopPropagation()
-                toggleMaximizeWindow(id)
-              }}
-              className="w-3 h-3 rounded-full bg-green-500/80 hover:bg-green-500 transition-colors flex items-center justify-center group"
-            >
-              <span className="text-[6px] text-green-950 font-bold opacity-0 group-hover:opacity-100 transition-opacity">⤢</span>
-            </button>
+            {!isMobile && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleMaximizeWindow(id)
+                }}
+                className="w-3 h-3 rounded-full bg-green-500/80 hover:bg-green-500 transition-colors flex items-center justify-center group"
+              >
+                <span className="text-[6px] text-green-950 font-bold opacity-0 group-hover:opacity-100 transition-opacity">⤢</span>
+              </button>
+            )}
           </div>
           <span className={`text-xs font-mono font-medium tracking-wide ${getTitleColor()}`}>
             {title}
@@ -121,12 +126,14 @@ export const Window = ({ id, title, children, x, y, width, height, zIndex, isMax
           >
             <VscChromeMinimize size={13} />
           </button>
-          <button
-            onClick={() => toggleMaximizeWindow(id)}
-            className="text-gray-400 hover:text-white transition-colors p-1"
-          >
-            {isMaximized ? <VscChromeRestore size={13} /> : <VscChromeMaximize size={13} />}
-          </button>
+          {!isMobile && (
+            <button
+              onClick={() => toggleMaximizeWindow(id)}
+              className="text-gray-400 hover:text-white transition-colors p-1"
+            >
+              {isMaximized ? <VscChromeRestore size={13} /> : <VscChromeMaximize size={13} />}
+            </button>
+          )}
           <button
             onClick={() => closeWindow(id)}
             className="text-gray-400 hover:text-neon-pink transition-colors p-1"

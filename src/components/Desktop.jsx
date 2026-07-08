@@ -25,7 +25,7 @@ import {
 
 export const Desktop = () => {
   const desktopRef = useRef(null)
-  const { windows, openWindow, minimizeWindow, focusWindow, activeWindowId } = useOSStore()
+  const { windows, openWindow, minimizeWindow, focusWindow, activeWindowId, isMobile } = useOSStore()
   const [time, setTime] = useState(new Date())
   const [startMenuOpen, setStartMenuOpen] = useState(false)
 
@@ -82,14 +82,14 @@ export const Desktop = () => {
       className="relative w-full h-screen overflow-hidden flex flex-col justify-between select-none crt-effect"
     >
       {/* 1. Desktop Icon Grid */}
-      <div className="flex-1 p-6 flex flex-row sm:flex-col flex-wrap gap-6 justify-start items-start content-start z-10 max-h-[calc(100vh-64px)] overflow-hidden">
+      <div className="flex-1 p-6 pt-14 sm:p-6 flex flex-row sm:flex-col flex-wrap gap-4 sm:gap-6 justify-center sm:justify-start items-start content-start z-10 max-h-[calc(100vh-64px)] overflow-hidden">
         {DESKTOP_ICONS.map((icon) => {
           const IconComp = icon.icon
           return (
             <motion.div
               key={icon.id}
               className="float-element cursor-pointer"
-              drag
+              drag={!isMobile}
               dragConstraints={desktopRef}
               dragMomentum={false}
               dragElastic={0.05}
@@ -97,8 +97,16 @@ export const Desktop = () => {
               whileTap={{ scale: 0.95 }}
             >
               <button
-                onDoubleClick={() => handleIconClick(icon.id)}
-                onTouchEnd={() => handleIconClick(icon.id)}
+                onClick={() => {
+                  if (isMobile) {
+                    handleIconClick(icon.id)
+                  }
+                }}
+                onDoubleClick={() => {
+                  if (!isMobile) {
+                    handleIconClick(icon.id)
+                  }
+                }}
                 className={`flex flex-col items-center justify-center gap-1.5 p-3 rounded-lg border w-20 h-20 sm:w-22 sm:h-22 select-none hover:shadow-[0_0_15px_rgba(0,210,255,0.15)] transition-shadow duration-300 ${icon.color}`}
               >
                 <IconComp size={28} className="drop-shadow-[0_2px_8px_rgba(0,210,255,0.2)]" />

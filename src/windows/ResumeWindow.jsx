@@ -22,6 +22,12 @@ export const ResumeWindow = () => {
           <FaFilePdf className="text-neon-pink" size={15} />
           <span className="text-gray-400 font-semibold">Resume_Vishwaraja_R.pdf</span>
         </div>
+        <button
+          onClick={() => window.print()}
+          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded bg-neon-pink/15 text-neon-pink border border-neon-pink/35 text-[10px] font-mono hover:bg-neon-pink/25 transition-colors font-bold select-none cursor-pointer"
+        >
+          <span>PRINT / SAVE</span>
+        </button>
       </div>
 
       {/* Main Document Content */}

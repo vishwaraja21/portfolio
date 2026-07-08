@@ -79,6 +79,7 @@ const DEFAULT_WINDOWS = [
 export const useOSStore = create((set, get) => ({
   isBooting: true,
   isBooted: false,
+  isMobile: false,
   bootLogs: [],
   windows: DEFAULT_WINDOWS,
   maxZIndex: 10,
@@ -88,6 +89,8 @@ export const useOSStore = create((set, get) => ({
     { text: 'Type "help" or "?" to list available commands.', type: 'system' },
     { text: ' ', type: 'system' },
   ],
+
+  setIsMobile: (isMobile) => set({ isMobile }),
 
   // Boot management
   setBooting: (isBooting) => set({ isBooting }),

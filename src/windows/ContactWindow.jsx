@@ -61,7 +61,7 @@ export const ContactWindow = () => {
   }
 
   return (
-    <div className="font-mono text-sm flex flex-col md:flex-row gap-6 h-full">
+    <div className="font-mono text-sm flex flex-col md:flex-row gap-6 md:h-full min-h-full">
       {/* Network Nodes Sidebar */}
       <div className="md:w-2/5 flex flex-col gap-4">
         <div className="text-xs text-neon-cyan font-bold tracking-wider uppercase pb-2 border-b border-white/5 select-none flex items-center gap-1.5">
@@ -220,7 +220,7 @@ export const ContactWindow = () => {
                 rows={4}
                 value={formData.message}
                 onChange={handleInputChange}
-                className="w-full flex-grow px-3 py-2 rounded bg-black/40 border border-white/5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-neon-purple font-mono resize-none"
+                className="w-full flex-grow min-h-[100px] md:min-h-0 px-3 py-2 rounded bg-black/40 border border-white/5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-neon-purple font-mono resize-none"
                 placeholder="Type your message here..."
               />
             </div>

@@ -50,12 +50,12 @@ export const ProjectsWindow = () => {
 
       {/* Main Folder Explorer view */}
       {selectedProjectIndex === null ? (
-        <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 gap-6 p-2">
+        <div className="flex-1 grid grid-cols-3 gap-2 sm:gap-6 p-1 sm:p-2">
           {portfolioData.projects.map((project, idx) => (
             <button
               key={idx}
               onClick={() => handleFolderClick(idx)}
-              className="flex flex-col items-center gap-2.5 p-4 rounded-lg bg-white/0 border border-transparent hover:bg-white/5 hover:border-white/5 hover:shadow-[0_0_15px_rgba(157,78,221,0.1)] transition-all group"
+              className="flex flex-col items-center gap-2.5 p-2 sm:p-4 rounded-lg bg-white/0 border border-transparent hover:bg-white/5 hover:border-white/5 hover:shadow-[0_0_15px_rgba(157,78,221,0.1)] transition-all group"
             >
               <div className="relative">
                 <FaFolder
@@ -128,7 +128,7 @@ export const ProjectsWindow = () => {
           </div>
 
           {/* Action Links */}
-          <div className="flex items-center gap-3 pt-3 border-t border-white/5 text-xs select-none">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 pt-3 border-t border-white/5 text-xs select-none">
             <a
               href={activeProject.githubLink}
               target="_blank"

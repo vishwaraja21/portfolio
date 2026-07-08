@@ -56,7 +56,7 @@ export const SkillsWindow = () => {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`flex-1 py-1 text-xs rounded transition-all font-semibold ${
+            className={`flex-1 py-1 text-[10px] sm:text-xs rounded transition-all font-semibold ${
               activeTab === tab
                 ? 'bg-neon-cyan/15 text-neon-cyan border border-neon-cyan/35 shadow-[0_0_10px_rgba(0,245,212,0.15)]'
                 : 'text-gray-400 hover:text-white border border-transparent'
