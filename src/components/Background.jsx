@@ -29,8 +29,15 @@ export const Background = () => {
     }
 
     const handleResize = () => {
+      const oldWidth = width > 0 ? width : 1
+      const oldHeight = height > 0 ? height : 1
       width = canvas.width = window.innerWidth || 1024
       height = canvas.height = window.innerHeight || 768
+      
+      particles.forEach((p) => {
+        p.x = (p.x / oldWidth) * width
+        p.y = (p.y / oldHeight) * height
+      })
     }
 
     const handleMouseMove = (e) => {
@@ -183,11 +190,11 @@ export const Background = () => {
         className="absolute inset-0 w-full h-full block"
       />
       {/* Holographic Subtle Watermark Name projection */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center opacity-[0.06] select-none pointer-events-none z-0">
-        <h1 className="font-display font-extrabold text-[7vw] tracking-[0.2em] uppercase text-white/90 leading-none text-center select-none">
+      <div className="absolute inset-0 flex flex-col items-center justify-center opacity-[0.22] sm:opacity-[0.12] select-none pointer-events-none z-0">
+        <h1 className="font-display font-extrabold text-[8.5vw] sm:text-[7vw] tracking-[0.2em] uppercase text-white/90 leading-none text-center select-none">
           VISHWARAJA R
         </h1>
-        <p className="font-mono text-[1.2vw] tracking-[0.5em] uppercase text-neon-cyan/95 mt-4 select-none">
+        <p className="font-mono text-[2.2vw] sm:text-[1.2vw] tracking-[0.5em] uppercase text-neon-cyan/95 mt-4 select-none">
           React & MERN Developer
         </p>
       </div>
