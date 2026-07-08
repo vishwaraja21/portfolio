@@ -1,0 +1,329 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
+
+  --color-dark-bg: #030014;
+  --color-dark-card: rgba(10, 8, 28, 0.55);
+  --color-dark-border: rgba(255, 255, 255, 0.07);
+  --color-neon-blue: #00d2ff;
+  --color-neon-purple: #9d4edd;
+  --color-neon-cyan: #00f5d4;
+  --color-neon-pink: #f72585;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse-slow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-grid-move: grid-move 20s linear infinite;
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-15px) rotate(3deg);
+    }
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 0.2;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.4;
+      transform: scale(1.15);
+    }
+  }
+
+  @keyframes grid-move {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 0 40px;
+    }
+  }
+}
+
+/* Custom Utilities and Reset */
+:root {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-dark-bg);
+  color: #e2e8f0;
+  overflow-x: hidden;
+}
+
+/* Custom premium scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #030014;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(157, 78, 221, 0.3);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 210, 255, 0.6);
+}
+
+/* Glassmorphism custom components */
+.glass-panel {
+  background: var(--color-dark-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-dark-border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.glass-panel-hover:hover {
+  border-color: rgba(0, 210, 255, 0.3);
+  box-shadow: 0 10px 40px -10px rgba(0, 210, 255, 0.2);
+  transform: translateY(-4px);
+}
+
+/* Interactive card glow tracking effect classes */
+.glow-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.glow-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.02)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Hologram text / Scanlines effect */
+.hologram-text {
+  text-shadow: 
+    0 0 5px rgba(0, 210, 255, 0.5),
+    0 0 15px rgba(0, 210, 255, 0.3),
+    0 0 30px rgba(0, 210, 255, 0.1);
+}
+
+.glow-text-purple {
+  text-shadow: 
+    0 0 8px rgba(157, 78, 221, 0.6),
+    0 0 20px rgba(157, 78, 221, 0.3);
+}
+
+.glow-text-cyan {
+  text-shadow: 
+    0 0 8px rgba(0, 245, 212, 0.6),
+    0 0 20px rgba(0, 245, 212, 0.3);
+}
+
+/* Background grid styling */
+.space-grid {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* CRT Screen Effect Overlay */
+.crt-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.crt-effect::after {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 5;
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+}
+
+.scanlines {
+  position: relative;
+}
+
+.scanlines::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.3)
+  );
+  background-size: 100% 4px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Neon Window Glows */
+.active-window-glow-blue {
+  box-shadow: 0 0 25px rgba(0, 210, 255, 0.25), inset 0 0 10px rgba(0, 210, 255, 0.1);
+  border-color: rgba(0, 210, 255, 0.4) !important;
+}
+
+.active-window-glow-purple {
+  box-shadow: 0 0 25px rgba(157, 78, 221, 0.25), inset 0 0 10px rgba(157, 78, 221, 0.1);
+  border-color: rgba(157, 78, 221, 0.4) !important;
+}
+
+.active-window-glow-cyan {
+  box-shadow: 0 0 25px rgba(0, 245, 212, 0.25), inset 0 0 10px rgba(0, 245, 212, 0.1);
+  border-color: rgba(0, 245, 212, 0.4) !important;
+}
+
+/* Custom terminal blinking cursor */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  background-color: var(--color-neon-cyan);
+  animation: blink 1s step-end infinite;
+}
+
+/* Floating animation details */
+.float-element {
+  animation: float-slow 4s ease-in-out infinite alternate;
+}
+
+@keyframes float-slow {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-8px); }
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Print Stylesheet for Resume Window */
+@media print {
+  /* Hide the entire body contents except the printable resume container */
+  body * {
+    visibility: hidden;
+  }
+  
+  /* Ensure the background effects are disabled */
+  #root, .crt-effect, .space-grid {
+    background: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Make only the resume and its contents visible */
+  .printable-resume,
+  .printable-resume * {
+    visibility: visible;
+  }
+
+  /* Position the resume to occupy the full print sheet */
+  .printable-resume {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    color: #111827 !important;
+    background: #ffffff !important;
+    padding: 20px !important;
+    margin: 0 !important;
+    font-size: 10pt !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Override cyberpunk borders, background colors, and neon glows for paper printing */
+  .printable-resume h2,
+  .printable-resume h3,
+  .printable-resume h4,
+  .printable-resume p,
+  .printable-resume li,
+  .printable-resume span,
+  .printable-resume a {
+    color: #1f2937 !important;
+    text-shadow: none !important;
+    background: none !important;
+  }
+
+  .printable-resume .text-neon-blue,
+  .printable-resume .text-neon-cyan,
+  .printable-resume .text-neon-pink,
+  .printable-resume .text-neon-purple {
+    color: #111827 !important;
+    font-weight: bold !important;
+  }
+
+  .printable-resume .border-white\/5,
+  .printable-resume border-b {
+    border-color: #d1d5db !important;
+  }
+
+  /* Format skills tags to print clean */
+  .printable-resume .pl-6.flex.flex-wrap.gap-2 span {
+    background: #f3f4f6 !important;
+    color: #374151 !important;
+    border: 1px solid #d1d5db !important;
+    padding: 2px 6px !important;
+    margin-bottom: 4px !important;
+  }
+
+  /* Style lists specifically for standard printed layout */
+  .printable-resume ul {
+    list-style-type: disc !important;
+    margin-left: 20px !important;
+    padding-left: 10px !important;
+  }
+
+  .printable-resume li {
+    display: list-item !important;
+  }
+}
+
