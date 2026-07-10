@@ -79,21 +79,37 @@ export const portfolioData = {
     }
   ],
   projects: [
-    {
-      title: 'Movie Suggestion App',
-      description: 'An interactive Movie Suggestion Application developed using the MERN stack. Features a responsive React.js user interface with dynamic movie search, personalized recommendations, and an optimized MongoDB schema to improve data retrieval and storage efficiency.',
-      tags: ['MongoDB', 'Express.js', 'React.js', 'Node.js', 'REST APIs', 'Tailwind CSS'],
-      githubLink: 'https://github.com/vishwaraja21/movie-suggestion-app',
-      liveLink: '#',
-      gradient: 'from-blue-500/20 to-cyan-500/20',
-      accentColor: '#00d2ff',
-      features: [
-        'Developed an interactive Movie Suggestion Application using the MERN stack.',
-        'Built a responsive React.js user interface with dynamic movie search and personalized recommendations.',
-        'Designed an optimized MongoDB schema to improve data retrieval and storage efficiency.',
-        'Integrated REST APIs to display detailed movie information.'
-      ]
-    },
+   {
+  title: 'AI Interview Preparation Platform',
+
+  description: 'An AI-powered Interview Preparation Platform developed using the MERN stack. Features AI mock interviews, coding practice, resume analysis, personalized learning roadmaps, progress tracking, and an interactive dashboard with Google Gemini AI integration.',
+
+  tags: [
+    'React.js',
+    'Node.js',
+    'Express.js',
+    'MongoDB',
+    'Google Gemini AI',
+    'JWT',
+    'REST APIs',
+    'Tailwind CSS'
+  ],
+
+  githubLink: 'https://github.com/vishwaraja21/AI_Interview',
+
+  liveLink: 'https://ai-interview-two-brown.vercel.app/',
+
+  gradient: 'from-violet-500/20 to-cyan-500/20',
+
+  accentColor: '#8B5CF6',
+
+  features: [
+    'Developed a full-stack AI Interview Preparation Platform using the MERN stack.',
+    'Implemented AI-powered mock interviews, coding practice, resume analysis, and personalized learning roadmaps.',
+    'Integrated Google Gemini AI, REST APIs, and JWT authentication for secure user access and AI-driven interview feedback.',
+    'Built responsive React.js interfaces and designed MongoDB databases for user profiles, interview history, and progress tracking.'
+  ]
+},
     {
       title: 'Hospital Management Web App',
       description: 'A full-stack Hospital Management Web Application using the MERN stack to streamline healthcare operations. Implements patient registration, appointment scheduling, doctor management, medical record tracking, and a secure role-based access control system.',
